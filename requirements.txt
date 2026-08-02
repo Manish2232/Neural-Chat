@@ -1,0 +1,34 @@
+# Core LangChain
+langchain
+langchain-core
+langchain-community
+
+# LangGraph
+langgraph
+
+# LLM Integrations
+langchain-openai
+langchain-google-genai
+langchain-groq
+langchain-mistralai
+
+# Environment Variables
+python-dotenv
+
+# Token Counting
+tiktoken
+
+# Vector Store (optional but commonly used)
+faiss-cpu
+
+# Backend (if building an API)
+fastapi
+uvicorn
+
+# HTTP Requests
+requests
+
+# Optional (recommended)
+pydantic
+httpx
+streamlit
