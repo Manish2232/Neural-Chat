@@ -74,7 +74,10 @@ st.markdown(
         position: relative;
         z-index: 1;
         padding-top: 1.5rem;
-        max-width: 1200px;
+        padding-bottom: 3rem;
+        max-width: 840px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     [data-testid="stHeader"]{ background: transparent; }
@@ -210,27 +213,42 @@ st.markdown(
         box-shadow: 0 0 12px rgba(255,47,208,0.5);
         color: #ffffff;
     }
-    # add inside the existing CSS <style> block
+
+    /* ---------- sidebar credit card ---------- */
     .credit-box{
-        position: fixed;
-        right: 12px;
-        bottom: 12px;
-        z-index: 9999;
-        padding: 6px 10px;
-        border: 1px solid #00f0ff;
-        border-radius: 8px;
-        background: rgba(3, 3, 5, 0.72);
-        color: #00f0ff;
-        font-size: 11px;
-        line-height: 1.35;
-        text-align: right;
-        box-shadow: 0 0 10px rgba(0,240,255,0.25);
+        margin-top: 22px;
+        padding: 12px 14px;
+        border: 1px solid rgba(212,255,0,0.45);
+        border-radius: 10px;
+        background: rgba(3, 3, 6, 0.72);
         backdrop-filter: blur(6px);
-        max-width: 260px;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 11.5px;
+        line-height: 1.7;
+        letter-spacing: 0.4px;
+        color: rgba(216, 243, 255, 0.7);
+        text-align: left;
+        box-shadow: 0 0 14px rgba(212,255,0,0.15);
+        animation: creditGlow 3.2s ease-in-out infinite;
     }
-    .credit-box span{
-        color: #ff2fd0;
-        text-shadow: 0 0 6px rgba(255,47,208,0.9);
+    .credit-box .credit-label{
+        color: rgba(200, 220, 235, 0.55);
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+    .credit-box .name-cyan{
+        color: var(--neon-cyan);
+        font-weight: 700;
+        text-shadow: 0 0 6px rgba(0,240,255,0.9), 0 0 16px rgba(0,240,255,0.5);
+    }
+    .credit-box .name-lime{
+        color: var(--neon-lime);
+        font-weight: 700;
+        text-shadow: 0 0 6px rgba(212,255,0,0.9), 0 0 16px rgba(212,255,0,0.5);
+    }
+    @keyframes creditGlow{
+        0%, 100% { box-shadow: 0 0 10px rgba(212,255,0,0.12), 0 0 0px rgba(0,240,255,0); border-color: rgba(212,255,0,0.35); }
+        50%      { box-shadow: 0 0 20px rgba(212,255,0,0.28), 0 0 26px rgba(0,240,255,0.18); border-color: rgba(212,255,0,0.6); }
     }
     </style>
     """,
@@ -278,6 +296,17 @@ with st.sidebar:
     else:
         st.markdown('<div class="status-pill">AWAITING MOOD SELECT</div>', unsafe_allow_html=True)
 
+    st.markdown(
+        """
+        <div class="credit-box">
+            <div class="credit-label">🙏 ALL CREDIT GOES TO</div>
+            <span class="name-cyan">Srila Prabhupada Ji</span><br>
+            &amp; <span class="name-lime">H.H. BPBS Maharaj Ji</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 # ----------------------------------------------------------------------------
 # MOOD SELECTION SCREEN (equivalent to the input() prompt in the CLI script)
 # ----------------------------------------------------------------------------
@@ -287,7 +316,7 @@ if st.session_state.mood is None:
         'SELECT AI PERSONALITY MODE TO INITIALIZE</p>',
         unsafe_allow_html=True,
     )
-    c1, c2, c3 = st.columns(3)
+    _, c1, c2, c3, _ = st.columns([1, 2, 2, 2, 1])
     with c1:
         if st.button("😄\nHAPPY"):
             st.session_state.mood = "Happy"
@@ -334,16 +363,3 @@ else:
                 st.markdown(response.content)
 
             st.session_state.messages.append(response)
-
-            # --------------------------------------------------------------------
-# FOOTER CREDIT
-# --------------------------------------------------------------------
-st.markdown(
-    """
-    <div class="credit-box">
-        All credit goes to <span>Srila Prabhupada Ji</span><br>
-        and Guru Maharaj <span>H.H. BPBS Maharaj Ji</span>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
