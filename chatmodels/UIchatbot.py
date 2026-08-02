@@ -210,6 +210,28 @@ st.markdown(
         box-shadow: 0 0 12px rgba(255,47,208,0.5);
         color: #ffffff;
     }
+    # add inside the existing CSS <style> block
+    .credit-box{
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        z-index: 9999;
+        padding: 6px 10px;
+        border: 1px solid #00f0ff;
+        border-radius: 8px;
+        background: rgba(3, 3, 5, 0.72);
+        color: #00f0ff;
+        font-size: 11px;
+        line-height: 1.35;
+        text-align: right;
+        box-shadow: 0 0 10px rgba(0,240,255,0.25);
+        backdrop-filter: blur(6px);
+        max-width: 260px;
+    }
+    .credit-box span{
+        color: #ff2fd0;
+        text-shadow: 0 0 6px rgba(255,47,208,0.9);
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -312,3 +334,16 @@ else:
                 st.markdown(response.content)
 
             st.session_state.messages.append(response)
+
+            # --------------------------------------------------------------------
+# FOOTER CREDIT
+# --------------------------------------------------------------------
+st.markdown(
+    """
+    <div class="credit-box">
+        All credit goes to <span>Srila Prabhupada Ji</span><br>
+        and Guru Maharaj <span>H.H. BPBS Maharaj Ji</span>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
