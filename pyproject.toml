@@ -17,3 +17,6 @@ dependencies = [
     "httpx",
     "pydantic"
 ]
+
+[tool.uv]
+package = false
